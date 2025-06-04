@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QRGate - A gateway to your Robot</title>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <box-icon type="solid" name="layer" color="orange" size="md"></box-icon>
+            <span>TeamFlex</span>
+        </div>
+        <ul class="nav-item" id="nav-menu">
+            <li class="nav-items"><a href="#sec-1">Home</a></li>
+            <li class="nav-items"><a href="#sec-2">How it works</a></li>
+            <li class="nav-items"><a href="#sec-3">Pricing</a></li>
+        </ul>
+        <button id="but">
+            <a href="#sec-4">
+                Download App
+                <box-icon name="download" color="white" size="sm"></box-icon>
+            </a>
+        </button>
+        <button class="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+            <!-- Hamburger icon (three lines) -->
+            <box-icon name="menu-wide" color="white" size="sm"></box-icon>
+            <span class="hamburger-icon"></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="sec-1">
+        <div class="hero-content">
+            <div class="robot-image">
+                <img src="robo.png" alt="3D Robot Guide" />
+            </div>
+            <div class="hero-text">
+                <h1>Explore Smart. Tour Safer with Our Robot Guide.</h1>
+                <p>Say goodbye to scams. Rent a robot tour guide with just a scan.</p>
+                <div class="qr-box">
+                    <button id="scan-btn">Scan To Unlock Your Robo <box-icon name="qr-scan"
+                            color="black"></box-icon></button>
+                    <div id="qr-reader"></div>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="sec-2">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <box-icon name="mobile-alt" type="solid" color="orange" size="lg"></box-icon>
+                <h3>Download & Register</h3>
+                <p>Get started by downloading the app and completing a quick registration with your safety deposit.</p>
+            </div>
+            <div class="step">
+                <box-icon name="time-five" type="solid" color="orange" size="lg"></box-icon>
+                <h3>Choose Your Hourly Plan</h3>
+                <p>Rent the robot for a fixed hourly rate. For example, ₹2000 per hour. Choose how long you need it.</p>
+            </div>
+            <div class="step">
+                <box-icon name="shield-alt-2" type="solid" color="orange" size="lg"></box-icon>
+                <h3>Return on Time</h3>
+                <p>A safety deposit (₹6000 or more) is collected. If returned on time, it’s refunded. Late? ₹2000/hour
+                    penalty applies.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Pricing Calculator Section -->
+    <section class="pricing-calculator" id="sec-3">
+        <h2>Pricing Calculator</h2>
+        <div class="calculator">
+            <label for="hours">Select Hours:</label>
+            <input type="number" id="hours" min="1" max="24" value="1" />
+            <p>Cost per hour: ₹2000</p>
+            <p>Safety deposit: ₹6000 (refundable)</p>
+            <p>Total Cost: ₹<span id="total-cost">8000</span></p>
+            <button id="pay-now-btn">Pay Now</button>
+        </div>
+    </section>
+
+    <!-- Sign In/Register Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="auth-close">&times;</span>
+            <div class="auth-tabs">
+                <button id="tab-signin" class="active">Sign In</button>
+                <button id="tab-register">Register</button>
+            </div>
+            <form id="signin-form" class="auth-form active">
+                <h3>Sign In</h3>
+                <input type="email" id="signin-email" placeholder="Email" required />
+                <input type="password" id="signin-password" placeholder="Password" required />
+                <button type="submit">Sign In</button>
+            </form>
+            <form id="register-form" class="auth-form">
+                <h3>Register</h3>
+                <input type="text" id="register-name" placeholder="Full Name" required />
+                <input type="email" id="register-email" placeholder="Email" required />
+                <input type="password" id="register-password" placeholder="Password" required />
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- UPI Payment Modal -->
+    <div id="upi-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="upi-close">&times;</span>
+            <h3>Select UPI App to Pay</h3>
+            <div class="upi-options">
+                <button class="upi-btn">Google Pay</button>
+                <button class="upi-btn">PhonePe</button>
+                <button class="upi-btn">Paytm</button>
+                <button class="upi-btn">BHIM</button>
+            </div>
+            <p>Amount to Pay: ₹<span id="upi-amount">0</span></p>
+            <button id="confirm-payment-btn">Confirm Payment</button>
+        </div>
+    </div>
+
+    <section id="signin-section" class="signin-section">
+        <div class="signin-container">
+            <div class="signin-card">
+                <h2>Sign In</h2>
+                <form id="signin-form">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+
+                    <button type="submit" class="signin-btn">Sign In</button>
+
+
+                </form>
+                <div class="signin-note">
+                    Don’t have an account? <a href="#">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download-section">
+        <div class="download-content">
+            <p class="download-text">Get started in 2 minutes. Your robot awaits!</p>
+            <div class="download-buttons">
+                <a href="#" class="download-btn ios-btn" aria-label="Download on iOS">
+                    <box-icon type="logo" name="apple" color="grey"></box-icon>
+                    Download for iOS
+                </a>
+                <a href="#" class="download-btn android-btn" aria-label="Download on Android">
+                    <box-icon type="logo" name="android" color="green"></box-icon>
+                    Download for Android
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 YourCompanyName. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#download-section">Download</a>
+                <a href="#contact">Contact</a>
+                <a href="#privacy-policy">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+
+
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

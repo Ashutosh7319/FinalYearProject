@@ -1,0 +1,1065 @@
+/* Reset and Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(-45deg, #000000, #1a1a1a, #2c2c2c, #000000);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  font-weight: 500;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Scrollbar for Dark Theme */
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: #111;
+}
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff8000, #ffcc00);
+  border-radius: 10px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #121212;
+  padding: 0 40px;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(255, 140, 0, 0.3);
+  backdrop-filter: saturate(180%) blur(10px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ff8c00;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.logo box-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff8c00;
+  font-size: 1.5rem;
+}
+
+.nav-item {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-items > a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ccc;
+  padding: 0 12px;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.nav-items > a::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #ff8c00;
+  transition: width 0.4s ease;
+  border-radius: 2px;
+}
+
+.nav-items > a:hover::after {
+  width: 100%;
+}
+
+.nav-items > a:hover {
+  color: #ff8c00;
+  transform: scale(1.08);
+  font-weight: 700;
+  text-shadow: 0 0 8px #ff8c00;
+}
+
+/* Enhanced Button */
+#but {
+  padding: 0.75rem 1.2rem; /* Use rem units for responsiveness */
+  font-size: 1rem; /* Make font size relative */
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.5), 0 0 15px rgba(255, 140, 0, 0.7);
+  cursor: pointer;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff6a00, #ffb347);
+  border: none;
+  text-decoration: none;
+  color: #fff;
+}
+
+#but a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+
+#but:hover {
+  background: linear-gradient(135deg, #ff8533, #ffe066);
+  transform: scale(1.07);
+  box-shadow: 0 6px 15px rgba(255, 165, 0, 0.8), 0 0 25px rgba(255, 180, 0, 1);
+}
+
+#but > a {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+#but:hover > a {
+  color: #222;
+}
+
+box-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+/* Hero Section */
+.hero-section {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 5%;
+  background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.robot-image img {
+  width: 400px;
+  max-width: 100%;
+  filter: drop-shadow(0 0 25px rgba(255, 165, 0, 0.6));
+  animation: float 4s ease-in-out infinite;
+  border-radius: 20px;
+  transition: filter 0.3s ease;
+  user-select: none;
+}
+
+.robot-image img:hover {
+  filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.85));
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  line-height: 1.2;
+  color: #ff9900;
+  /* text-shadow: 0 0 15px #ff9900; */
+}
+
+.hero-text p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: #ddd;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+
+/* QR Scanner Box */
+.qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  max-width: 350px;
+}
+
+#scan-btn {
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  font-family: "Seoge UI";
+  color: rgb(32, 31, 31);
+  font-weight: 700;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255, 165, 0, 0.75);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  font-size: 1.15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+
+#scan-btn:hover {
+  background: linear-gradient(45deg, #ff8533, #ffe066);
+  transform: scale(1.07);
+  box-shadow: 0 7px 20px rgba(255, 180, 0, 1);
+}
+
+#qr-reader {
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  display: none;
+  box-shadow: 0 0 20px #ff9900;
+  transition: box-shadow 0.3s ease;
+}
+
+#result {
+  font-size: 1.25rem;
+  color: #ffb84d;
+  min-height: 2em;
+  word-break: break-word;
+  margin-top: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  user-select: text;
+  transition: color 0.3s ease;
+}
+
+#result:hover {
+  color: #ffc966;
+}
+
+/* How It Works Section */
+.how-it-works {
+  padding: 60px 10%;
+  text-align: center;
+  background: #121212;
+  color: white;
+  user-select: none;
+}
+
+.how-it-works h2 {
+  font-size: 3rem;
+  margin-bottom: 40px;
+  font-weight: 800;
+  color: #ff9900;
+  /* text-shadow: 0 0 15px #ff9900; */
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.step {
+  flex: 1;
+  max-width: 300px;
+  background: #1e1e1e;
+  padding: 30px 25px;
+  border-radius: 18px;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.5),
+    inset 0 0 8px rgba(255, 140, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.step:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 25px rgba(255, 195, 0, 0.9),
+    inset 0 0 12px rgba(255, 195, 0, 0.3);
+}
+
+.step box-icon {
+  margin-bottom: 22px;
+  font-size: 3rem;
+  color: #ff8c00;
+  filter: drop-shadow(0 0 5px #ff8c00);
+}
+
+.step h3 {
+  font-size: 1.7rem;
+  margin-bottom: 14px;
+  color: #ffb347;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.step p {
+  font-size: 1.15rem;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+/* Pricing Calculator Section */
+.pricing-calculator {
+  padding: 60px 10%;
+  background: #0f0f0f;
+  text-align: center;
+  color: white;
+  user-select: none;
+}
+
+.pricing-calculator h2 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+  font-weight: 800;
+  color: #ff9900;
+  /* text-shadow: 0 0 15px #ff9900; */
+}
+
+.calculator {
+  max-width: 400px;
+  margin: 0 auto;
+  background: #1a1a1a;
+  padding: 35px 30px;
+  border-radius: 22px;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.6),
+    inset 0 0 10px rgba(255, 140, 0, 0.15);
+  user-select: text;
+}
+
+.calculator label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 14px;
+  font-size: 1.3rem;
+  text-align: left;
+  color: #ffb347;
+  letter-spacing: 0.03em;
+}
+
+.calculator input[type="number"] {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1.2rem;
+  border-radius: 14px;
+  border: none;
+  margin-bottom: 25px;
+  background: #222;
+  color: #fff;
+  box-shadow: inset 0 0 6px rgba(255, 165, 0, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.calculator input[type="number"]:focus {
+  outline: none;
+  background: #333;
+  box-shadow: 0 0 10px #ffb347;
+  color: #ffb347;
+}
+
+.calculator p {
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+  color: #ffcc66;
+  font-weight: 600;
+  user-select: none;
+}
+
+.calculator button {
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  font-family: "Poppins";
+  color: rgb(58, 55, 55);
+  font-weight: 700;
+  border: none;
+  padding: 18px 30px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255, 165, 0, 0.8), 0 0 10px #ffb347;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.2rem;
+  width: 100%;
+  user-select: none;
+}
+
+.calculator button:hover {
+  background: linear-gradient(45deg, #ff8533, #ffe066);
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(255, 180, 0, 1), 0 0 15px #ffcc33;
+}
+
+/* Modal common styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  -moz-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background-color: #222;
+  margin: 10% auto;
+  padding: 35px 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  color: white;
+  box-shadow: 0 0 30px #ff9900, inset 0 0 15px #ff9900;
+  position: relative;
+  user-select: text;
+}
+
+.close {
+  color: #bbb;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.close:hover {
+  color: #ff9900;
+}
+
+/* Auth modal specific */
+.auth-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  user-select: none;
+}
+
+.auth-tabs button {
+  background: transparent;
+  border: none;
+  color: #bbb;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 12px 25px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  letter-spacing: 0.04em;
+}
+
+.auth-tabs button.active {
+  color: #ffb347;
+  border-color: #ffb347;
+  text-shadow: 0 0 6px #ffb347;
+}
+
+.auth-form {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auth-form.active {
+  display: flex;
+}
+
+.auth-form input {
+  padding: 15px 18px;
+  border-radius: 14px;
+  border: none;
+  font-size: 1.1rem;
+  background: #222;
+  color: #fff;
+  box-shadow: inset 0 0 7px rgba(255, 165, 0, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  background: #333;
+  box-shadow: 0 0 15px #ffb347;
+  color: #ffb347;
+}
+
+.auth-form button {
+  background: #ff9900;
+  border: none;
+  padding: 18px 22px;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  color: black;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.2rem;
+  user-select: none;
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.8);
+}
+
+.auth-form button:hover {
+  background: #ffbb33;
+  box-shadow: 0 6px 20px rgba(255, 195, 0, 1);
+}
+
+/* UPI modal specific */
+.upi-options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.upi-btn {
+  background: #333;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 16px;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  flex: 1 1 40%;
+  min-width: 120px;
+  user-select: none;
+  box-shadow: 0 0 5px rgba(255, 165, 0, 0.3);
+}
+
+.upi-btn:hover {
+  background: #ff9900;
+}
+/* UPI modal specific (continued) */
+.upi-btn:active {
+  background: #cc7a00;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.7) inset;
+  transform: scale(0.97);
+}
+
+/* Modal footer buttons */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+  user-select: none;
+}
+
+.modal-footer button {
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  color: black;
+  box-shadow: 0 5px 15px rgba(255, 165, 0, 0.8);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.modal-footer button:hover {
+  background: linear-gradient(45deg, #ff8533, #ffe066);
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .robot-image img {
+    width: 300px;
+  }
+
+  .steps {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .calculator {
+    max-width: 100%;
+  }
+
+  .pricing-calculator,
+  .how-it-works {
+    padding: 40px 5%;
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+}
+
+/* Accessibility */
+button:focus,
+a:focus {
+  outline: 3px solid #ffb347;
+  outline-offset: 3px;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+#confirm-payment-btn {
+  background-color: #28a745; /* Green for success */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#confirm-payment-btn:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+#confirm-payment-btn:active {
+  background-color: #1e7e34;
+  transform: translateY(0);
+}
+
+/* Section Wrapper */
+.signin-section {
+  padding: 80px 20px;
+  background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+  color: #fff;
+}
+
+/* Centered Container */
+.signin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.signin-card {
+  background: #1e1e1e;
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+  color: #fff;
+}
+
+.signin-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Heading */
+.signin-card h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #fff;
+  text-align: center;
+}
+
+/* Labels and Inputs */
+.signin-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.signin-card input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.signin-card input::placeholder {
+  color: #aaa;
+}
+
+.signin-card input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Sign-in Note */
+.signin-note {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.signin-note a {
+  color: #4da6ff;
+  text-decoration: none;
+}
+
+.signin-note a:hover {
+  text-decoration: underline;
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(
+    to right,
+    #4b6cb7,
+    #182848
+  ); /* Deep blue gradient */
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+}
+
+.signin-btn:hover {
+  background: linear-gradient(to right, #5f7cd8, #203c69);
+  transform: translateY(-2px);
+}
+
+.signin-btn:active {
+  transform: scale(0.98);
+}
+
+.download-section {
+  background: linear-gradient(135deg, #000000, #222222);
+  padding: 40px 20px;
+  text-align: center;
+  color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.download-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.download-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+.download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.download-icon {
+  font-size: 24px; /* Size for boxicons */
+}
+
+/* iOS button gradient - blue style */
+.ios-btn {
+  background: linear-gradient(to right, #fcfcfc, #747982);
+}
+
+/* Android button gradient - green style */
+.android-btn {
+  background: linear-gradient(to right, #3ddc84, #1aab3a);
+}
+.site-footer {
+  background: linear-gradient(135deg, #111111, #222222);
+  color: #ccc;
+  padding: 20px 15px;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9rem;
+  border-top: 1px solid #444;
+  margin-top: 40px;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin: 0 0 10px;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Hamburger button styles */
+.hamburger {
+  display: none; /* Hidden by default, shown on small screens */
+  width: 30px;
+  height: 25px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1101; /* above navbar */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background-color: #ffb347;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Show hamburger on small screens */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  /* Ensure center alignment */
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .steps {
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Optional: adjust max-width of steps */
+  .step {
+    max-width: 90%;
+  }
+}
+/* Style for the hamburger toggle button */
+.hamburger-btn {
+  display: none; /* Hidden on large screens */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1101;
+  border: none;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-icon {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #ffb347;
+  position: relative;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #ffb347;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.hamburger-icon::before {
+  top: -8px;
+  border: none;
+}
+
+.hamburger-icon::after {
+  top: 8px;
+  border: none;
+}
+
+/* When menu is open, animate to cross (X) */
+.hamburger-btn.open .hamburger-icon {
+  background-color: transparent;
+  border: none;
+}
+.hamburger-btn.open .hamburger-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+  border: none;
+}
+.hamburger-btn.open .hamburger-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+  border: none;
+}
+
+/* Show hamburger button on small screens */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    border: none;
+  }
+
+  /* Hide nav menu initially, show when active */
+  #nav-menu {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 70px; /* below navbar */
+    background: #222;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px 0;
+    border-radius: 8px;
+    z-index: 1100;
+  }
+  #nav-menu.show {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  #but {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Optional: on very small screens, make it smaller */
+@media (max-width: 480px) {
+  #but {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+}
