@@ -638,7 +638,7 @@ box-icon {
   transform: scale(1.05);
 }
 
-.chatbot-link {
+ .chatbot-link {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -647,20 +647,36 @@ box-icon {
     padding: 12px 18px;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
-    font-family: sans-serif;
+    font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
     text-decoration: none;
     z-index: 1000;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
 
   .chatbot-link:hover {
     background-color: #e67e00;
+    transform: scale(1.05);
   }
 
+  @media (max-width: 600px) {
+    .chatbot-link {
+      padding: 10px 14px;
+      font-size: 14px;
+      bottom: 16px;
+      right: 16px;
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .chatbot-link span {
+      display: none; /* Show only icon on very small screens */
+    }
+  }
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-content {
