@@ -160,3 +160,16 @@ document.addEventListener("DOMContentLoaded", () => {
         navMenu.classList.toggle('show', isOpen);
     });
 });
+
+function openChatbotPopup() {
+    const popupWidth = 420;
+    const popupHeight = 600;
+    const left = (screen.width / 2) - (popupWidth / 2);
+    const top = (screen.height / 2) - (popupHeight / 2);
+    
+    window.open(
+      'https://ai-chatbot-gemini-tau.vercel.app/',
+      'ChatbotPopup',
+      `width=${popupWidth},height=${popupHeight},top=${top},left=${left},resizable=no,scrollbars=no`
+    );
+  }

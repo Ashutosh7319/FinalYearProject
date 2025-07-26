@@ -654,6 +654,7 @@ box-icon {
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
   }
 
@@ -674,9 +675,11 @@ box-icon {
 
   @media (max-width: 400px) {
     .chatbot-link span {
-      display: none; /* Show only icon on very small screens */
+      display: none;
     }
   }
+
+ 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-content {
