@@ -638,6 +638,29 @@ box-icon {
   transform: scale(1.05);
 }
 
+.chatbot-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff8c00;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .chatbot-link:hover {
+    background-color: #e67e00;
+  }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-content {
