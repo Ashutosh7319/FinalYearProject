@@ -641,7 +641,7 @@ box-icon {
 .chatbot-link {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    right: 5px;
     transform: translateX(-50%);
     background-color: #ff8c00;
     color: white;
