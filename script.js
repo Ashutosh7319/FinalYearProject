@@ -150,17 +150,6 @@ document.querySelectorAll('.nav-links a').forEach(anchor => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const hamburgerBtn = document.querySelector('.hamburger-btn');
-    const navMenu = document.getElementById('nav-menu');
-
-    hamburgerBtn.addEventListener('click', () => {
-        const isOpen = hamburgerBtn.classList.toggle('open');
-        hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
-        navMenu.classList.toggle('show', isOpen);
-    });
-});
-
 function openChatbotPopup() {
     const popupWidth = 420;
     const popupHeight = 600;
@@ -173,3 +162,15 @@ function openChatbotPopup() {
       `width=${popupWidth},height=${popupHeight},top=${top},left=${left},resizable=no,scrollbars=no`
     );
   }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburgerBtn.addEventListener('click', () => {
+        const isOpen = hamburgerBtn.classList.toggle('open');
+        hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+        navMenu.classList.toggle('show', isOpen);
+    });
+});
+
