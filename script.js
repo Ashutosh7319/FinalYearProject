@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // --- QR Code scanning logic ---
   const scanBtn = document.getElementById("scan-btn");
   const qrReader = document.getElementById("qr-reader");
   const resultContainer = document.getElementById("result");
@@ -46,53 +45,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- Pricing Calculator logic ---
+  // --- Pricing ---
   const hoursInput = document.getElementById("hours");
   const totalCostSpan = document.getElementById("total-cost");
   const COST_PER_HOUR = 2000;
   const DEPOSIT = 6000;
 
-  // Initialize with default cost
-  totalCostSpan.textContent = COST_PER_HOUR + DEPOSIT;
-
   hoursInput.addEventListener("input", () => {
     const hours = parseInt(hoursInput.value) || 1;
-    totalCostSpan.textContent = (hours * COST_PER_HOUR) + DEPOSIT;
+    totalCostSpan.textContent = hours * COST_PER_HOUR + DEPOSIT;
   });
 
-  // --- Razorpay Payment Logic ---
+  // --- Razorpay Payment ---
   document.getElementById("pay-now-btn").addEventListener("click", async () => {
-    const amount = parseInt(totalCostSpan.textContent); // use dynamic amount
+    const amount = parseInt(totalCostSpan.textContent);
+    const BACKEND_URL = "https://your-backend.onrender.com"; // replace with your Render URL
 
     try {
-      // 1️⃣ Request order from backend
-      const response = await fetch("http://localhost:3000/create-order", {
+      // 1️⃣ Create order
+      const response = await fetch(`${BACKEND_URL}/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount })
+        body: JSON.stringify({ amount }),
       });
 
       const order = await response.json();
 
-      if (!order.id) {
-        alert("❌ Failed to create order. Check backend logs.");
-        return;
-      }
-
-      // 2️⃣ Open Razorpay Checkout
+      // 2️⃣ Open Razorpay
       const options = {
-        key: "rzp_test_RGbTLZ2nqVrbMS", // Test Key ID
+        key: "rzp_test_RGbTLZ2nqVrbMS",
         amount: order.amount,
         currency: order.currency,
         order_id: order.id,
         name: "QRGate Robot Rental",
         description: "Hourly Subscription Payment",
         handler: async function (paymentResult) {
-          // 3️⃣ Verify payment with backend
-          const verifyRes = await fetch("http://localhost:3000/verify-payment", {
+          const verifyRes = await fetch(`${BACKEND_URL}/verify-payment`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(paymentResult)
+            body: JSON.stringify(paymentResult),
           });
 
           const result = await verifyRes.json();
@@ -102,14 +93,14 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("❌ Payment Failed. Try Again.");
           }
         },
-        theme: { color: "#F37254" }
+        theme: { color: "#F37254" },
       };
 
       const rzp = new Razorpay(options);
       rzp.open();
     } catch (err) {
-      console.error("Payment Error:", err);
-      alert("⚠️ Something went wrong. Please try again.");
+      console.error(err);
+      alert("Something went wrong while processing payment.");
     }
   });
 });
