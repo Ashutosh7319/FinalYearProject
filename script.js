@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Razorpay Payment ---
   document.getElementById("pay-now-btn").addEventListener("click", async () => {
     const amount = parseInt(totalCostSpan.textContent);
-    const BACKEND_URL = "https://your-backend.onrender.com"; // replace with your Render URL
+    const BACKEND_URL = "https://finalyearproject-52g2.onrender.com/"; // replace with your Render URL
 
     try {
       // 1️⃣ Create order
