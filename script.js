@@ -52,51 +52,64 @@ document.addEventListener("DOMContentLoaded", () => {
   const COST_PER_HOUR = 2000;
   const DEPOSIT = 6000;
 
+  // Initialize with default cost
+  totalCostSpan.textContent = COST_PER_HOUR + DEPOSIT;
+
   hoursInput.addEventListener("input", () => {
     const hours = parseInt(hoursInput.value) || 1;
     totalCostSpan.textContent = (hours * COST_PER_HOUR) + DEPOSIT;
   });
 
-  // --- Razorpay Payment ---
-  const payBtn = document.getElementById("pay-now-btn");
+  // --- Razorpay Payment Logic ---
+  document.getElementById("pay-now-btn").addEventListener("click", async () => {
+    const amount = parseInt(totalCostSpan.textContent); // use dynamic amount
 
-  payBtn.addEventListener("click", async () => {
-    const amount = parseInt(totalCostSpan.textContent);
+    try {
+      // 1️⃣ Request order from backend
+      const response = await fetch("http://localhost:3000/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount })
+      });
 
-    // 1️⃣ Request order from backend
-    const response = await fetch("http://localhost:3000/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount })
-    });
-    const order = await response.json();
+      const order = await response.json();
 
-    // 2️⃣ Open Razorpay Checkout
-    const options = {
-      key: "YOUR_KEY_ID", // Replace with Razorpay Test Key
-      amount: order.amount,
-      currency: order.currency,
-      order_id: order.id,
-      name: "QRGate Robot Rental",
-      description: "Hourly Subscription Payment",
-      handler: async function (paymentResult) {
-        // 3️⃣ Verify payment with backend
-        const verifyRes = await fetch("http://localhost:3000/verify-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(paymentResult)
-        });
-
-        const result = await verifyRes.json();
-        if (result.status === "success") {
-          alert("✅ Payment Successful!");
-        } else {
-          alert("❌ Payment Failed. Try Again.");
-        }
+      if (!order.id) {
+        alert("❌ Failed to create order. Check backend logs.");
+        return;
       }
-    };
 
-    const rzp = new Razorpay(options);
-    rzp.open();
+      // 2️⃣ Open Razorpay Checkout
+      const options = {
+        key: "rzp_test_RGbTLZ2nqVrbMS", // Test Key ID
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.id,
+        name: "QRGate Robot Rental",
+        description: "Hourly Subscription Payment",
+        handler: async function (paymentResult) {
+          // 3️⃣ Verify payment with backend
+          const verifyRes = await fetch("http://localhost:3000/verify-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(paymentResult)
+          });
+
+          const result = await verifyRes.json();
+          if (result.status === "success") {
+            alert("✅ Payment Successful!");
+          } else {
+            alert("❌ Payment Failed. Try Again.");
+          }
+        },
+        theme: { color: "#F37254" }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      console.error("Payment Error:", err);
+      alert("⚠️ Something went wrong. Please try again.");
+    }
   });
 });

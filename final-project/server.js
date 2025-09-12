@@ -1,38 +1,44 @@
 const express = require("express");
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
+const path = require("path");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Replace with your real keys from Razorpay Dashboard
+// Serve your frontend files (index.html, style.css, script.js)
+app.use(express.static(path.join(__dirname, ".."))); // Go up one folder to FinalYearProject
+
+// Replace with your Razorpay Test Key ID and Secret
 const razorpay = new Razorpay({
-  key_id: "YOUR_KEY_ID",
-  key_secret: "YOUR_KEY_SECRET"
+  key_id: "rzp_test_RGbTLZ2nqVrbMS",
+  key_secret: "J5WcxqXJM7Z7WIKG4vk73NWo"
 });
 
-// Create order
+// Create order route
 app.post("/create-order", async (req, res) => {
   try {
+    const { amount } = req.body;
     const order = await razorpay.orders.create({
-      amount: req.body.amount * 100, // amount in paise
+      amount: amount * 100, // amount in paise
       currency: "INR",
       receipt: "receipt_" + Date.now()
     });
     res.json(order);
   } catch (err) {
-    res.status(500).send(err);
+    console.error(err);
+    res.status(500).json({ error: "Something went wrong while creating order" });
   }
 });
 
-// Verify payment
+// Verify payment route
 app.post("/verify-payment", (req, res) => {
   const { order_id, payment_id, signature } = req.body;
 
   const expectedSignature = crypto
-    .createHmac("sha256", "YOUR_KEY_SECRET")
+    .createHmac("sha256", razorpay.key_secret)
     .update(order_id + "|" + payment_id)
     .digest("hex");
 
@@ -43,4 +49,7 @@ app.post("/verify-payment", (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("✅ Server running at http://localhost:3000"));
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
+});
