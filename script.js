@@ -104,11 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
         order_id: order.id,
         name: "QRGate Robot Rental",
         description: "Hourly Subscription Payment",
-        prefill: {
-          name: "Test User",
-          email: "test@example.com",
-          contact: "9999999999",
-        },
 
         handler: async function (paymentResult) {
           // 3️⃣ Verify payment on backend
@@ -162,3 +157,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
