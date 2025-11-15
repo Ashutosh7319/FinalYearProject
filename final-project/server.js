@@ -1,6 +1,9 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
+
 app.use(cors({
   origin: [
     "http://127.0.0.1:5500",
@@ -13,7 +16,6 @@ app.use(cors({
 
 
 const app = express();
-app.use(cors()); // allow requests from anywhere
 app.use(express.json());
 
 // Use environment variables for keys (recommended for Render)
