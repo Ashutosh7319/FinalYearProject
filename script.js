@@ -128,6 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+document.getElementById("payment-success").style.display = "block";
+document.getElementById("qr-image").src = data.qrImage;
+
 const qrResponse = await fetch("https://finalyearproject-52g2.onrender.com/generate-qr", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
