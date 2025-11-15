@@ -60,20 +60,18 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #ff8c00;
-  letter-spacing: 0.05em;
-  user-select: none;
+  font-size: 22px;
+  font-weight: 600;
+  color: #ff8800; /* adjust to your theme */
 }
 
-.logo box-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ff8c00;
-  font-size: 1.5rem;
+.logo-img {
+  width: 40px;         /* adjust size as needed */
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;  /* remove if you want square */
 }
+
 
 .nav-item {
   display: flex;
@@ -231,7 +229,7 @@ box-icon {
 }
 
 .robot-image img {
-  width: 400px;
+  width: 500px;
   max-width: 100%;
   filter: drop-shadow(0 0 25px rgba(255, 165, 0, 0.6));
   animation: float 4s ease-in-out infinite;
@@ -1179,4 +1177,24 @@ a:focus {
 #pay-now-btn
 {
   font-family:'Trebuchet MS';
+}
+
+.signin-btn {
+  background: #ff8800;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.signin-btn:hover {
+  background: #e67600;
+  transform: translateY(-2px);
 }

@@ -129,3 +129,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((reg) => console.log("Service Worker registered:", reg))
+      .catch((err) => console.error("Service Worker registration failed:", err));
+  });
+}
+
+  let deferredPrompt;
+
+  // Detect install event
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e; 
+    document.getElementById("but").style.display = "block"; // show install button
+  });
+
+  // When user clicks Download App
+  document.getElementById("but").addEventListener("click", async () => {
+    if (!deferredPrompt) {
+      alert("App is already installed or not installable right now.");
+      return;
+    }
+
+    deferredPrompt.prompt();
+
+    const choice = await deferredPrompt.userChoice;
+
+    if (choice.outcome === "accepted") {
+      console.log("User installed the app");
+    } else {
+      console.log("User dismissed install prompt");
+    }
+
+    deferredPrompt = null;
+  });

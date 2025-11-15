@@ -3,9 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <title>Your QR Code</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-    #qr-image { width: 250px; height: 250px; margin-top: 20px; }
+ <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1b1919, #201e1d);
+      color: white;
+    }
+
+    .qr-container {
+      background: #f6f4f4;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #faf9f9;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #d3ff7c;
+      margin-bottom: 30px;
+    }
+
+    #qr-image {
+      width: 250px;
+      height: 250px;
+      margin-bottom: 20px;
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff7f50;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-download:hover {
+      background-color: #ff6333;
+    }
   </style>
 </head>
 <body>
