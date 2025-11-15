@@ -22,54 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --- QR Code scanning logic ---
-  const scanBtn = document.getElementById("scan-btn");
-  const qrReader = document.getElementById("qr-reader");
-  const resultContainer = document.getElementById("result");
-
-  let html5QrCode;
-  let isScanning = false;
-
-  scanBtn.addEventListener("click", () => {
-    if (!isScanning) {
-      qrReader.style.display = "block";
-      startScanner();
-      scanBtn.textContent = "Stop Scanning";
-      isScanning = true;
-    } else {
-      stopScanner();
-      scanBtn.textContent = "Scan To Unlock Your Robo";
-      qrReader.style.display = "none";
-      resultContainer.textContent = "";
-      isScanning = false;
-    }
-  });
-
-  function startScanner() {
-    html5QrCode = new Html5Qrcode("qr-reader");
-    html5QrCode
-      .start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        (decodedText) => {
-          resultContainer.textContent = `Scanned QR Code: ${decodedText}`;
-          stopScanner();
-          scanBtn.textContent = "Scan To Unlock Your Robo";
-          qrReader.style.display = "none";
-          isScanning = false;
-          alert(`QR Code detected: ${decodedText}`);
-        }
-      )
-      .catch((err) => console.error("Unable to start scanning.", err));
-  }
-
-  function stopScanner() {
-    if (html5QrCode) {
-      html5QrCode.stop().then(() => html5QrCode.clear());
-    }
-  }
-
-  // --- Pricing Calculator logic ---
   const hoursInput = document.getElementById("hours");
   const totalCostSpan = document.getElementById("total-cost");
   const COST_PER_HOUR = 20;
@@ -79,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const hours = parseInt(hoursInput.value) || 1;
     totalCostSpan.textContent = hours * COST_PER_HOUR + DEPOSIT;
   });
-  
+
   document.getElementById("pay-now-btn").addEventListener("click", async () => {
-    const amount = parseInt(totalCostSpan.textContent); // dynamic amount
+    const amount = parseInt(totalCostSpan.textContent);
 
     try {
-      // 1️⃣ Create order from your Render backend
+      // Create order
       const response = await fetch(
         "https://finalyearproject-52g2.onrender.com/create-order",
         {
@@ -96,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const order = await response.json();
 
-      // 2️⃣ Open Razorpay Checkout
+      // Razorpay options
       const options = {
         key: "rzp_test_RGbTLZ2nqVrbMS",
         amount: order.amount,
@@ -106,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         description: "Hourly Subscription Payment",
 
         handler: async function (paymentResult) {
-          // 3️⃣ Verify payment on backend
           const verifyRes = await fetch(
             "https://finalyearproject-52g2.onrender.com/verify-payment",
             {
@@ -119,30 +70,26 @@ document.addEventListener("DOMContentLoaded", () => {
           const result = await verifyRes.json();
 
           if (result.status === "success") {
-            alert("✅ Payment Successful!");
+            alert("Payment Successful!");
 
-            // ⭐ 4️⃣ Generate QR Code automatically
             const qrRes = await fetch(
               "https://finalyearproject-52g2.onrender.com/generate-qr",
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  userId: "USER_12345", // Replace with real user logic later
-                  sessionId: order.id, // Use Razorpay order ID as session/trip ID
+                  userId: "USER_12345",
+                  sessionId: order.id,
                 }),
               }
             );
 
             const qrData = await qrRes.json();
 
-            // Display QR in <img id="qr-image">
             document.getElementById("qr-image").src = qrData.qrImage;
-
-            // Optionally show QR container (if hidden)
             document.getElementById("qr-container").style.display = "block";
           } else {
-            alert("❌ Payment Failed. Try Again.");
+            alert("Payment Failed.");
           }
         },
 
@@ -153,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       rzp.open();
     } catch (err) {
       console.error("Payment error:", err);
-      alert("❌ Something went wrong while processing payment.");
+      alert("Something went wrong.");
     }
   });
 });
