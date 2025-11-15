@@ -1,7 +1,16 @@
 const express = require("express");
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
-const cors = require("cors");
+app.use(cors({
+  origin: [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    "https://teamflex.netlify.app"
+  ],
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type"
+}));
+
 
 const app = express();
 app.use(cors()); // allow requests from anywhere
