@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (result.status === "success") {
             //alert("✅ UPI Payment Successful!");
-            window.location.href = `qr.html?sessionId=${order.id}&userId=USER_12345`;
-
+            localStorage.setItem("orderId", order.id);
+            window.location.href = "qr.html";
             // 4️⃣ Generate QR
             const qrRes = await fetch(
               "https://finalyearproject-52g2.onrender.com/generate-qr",

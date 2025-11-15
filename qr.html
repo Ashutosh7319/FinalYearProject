@@ -3,28 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Your QR Code</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        padding: 2rem;
+      }
+      #qr-container {
+        margin-top: 2rem;
+        display: none; /* will show when QR is fetched */
+        text-align: center;
+      }
+      #qr-image {
+        width: 250px;
+        height: 250px;
+      }
+    </style>
   </head>
   <body>
-    <img id="qr-image" alt="Your QR Code" style="width: 250px" />
-    <script src="script.js"></script>
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const sessionId = params.get("sessionId");
-      const userId = params.get("userId");
+    <h1>Your QR Code</h1>
+    <div id="qr-container">
+      <img id="qr-image" alt="QR Code" />
+    </div>
 
-      if (sessionId && userId) {
-        fetch("https://finalyearproject-52g2.onrender.com/generate-qr", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId, userId }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          // Example: pass userId and sessionId (replace with dynamic values)
+          const userId = "USER_12345";
+          const sessionId = localStorage.getItem("orderId") || "TEST_ORDER";
+
+          const qrRes = await fetch(
+            "https://finalyearproject-52g2.onrender.com/generate-qr",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                userId: "USER_12345",
+                sessionId: "TEST_ORDER",
+              }),
+            }
+          );
+
+          const data = await qrRes.json();
+
+          if (data.status === "success") {
             document.getElementById("qr-image").src = data.qrImage;
-          })
-          .catch((err) => console.error("QR generation error:", err));
-      }
+            document.getElementById("qr-container").style.display = "block";
+          } else {
+            alert("Failed to generate QR code");
+          }
+        } catch (err) {
+          console.error("Error fetching QR:", err);
+          alert("Something went wrong while generating the QR code");
+        }
+      });
     </script>
   </body>
 </html>
