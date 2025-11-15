@@ -118,6 +118,32 @@ body::-webkit-scrollbar-thumb {
   text-shadow: 0 0 8px #ff8c00;
 }
 
+#nav-menu {
+  display: none;                /* hidden by default */
+  position: absolute;
+  top: 70px;                    /* below navbar */
+  left: 0;
+  width: 100%;
+  background: #111;
+  padding: 1rem 0;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  z-index: 1500;
+}
+
+/* Show when active */
+#nav-menu.active {
+  display: flex;
+}
+
+/* Nav item styling (optional) */
+#nav-menu li a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
 /* Enhanced Button */
 #but {
   padding: 0.75rem 1.2rem; /* Use rem units for responsiveness */
@@ -164,6 +190,14 @@ body::-webkit-scrollbar-thumb {
 #but:hover > a {
   color: #222;
 }
+
+
+/* Animate hamburger when open (optional) */
+.hamburger-btn.open box-icon {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
 
 box-icon {
   display: inline-flex;
@@ -257,7 +291,7 @@ box-icon {
 
 #scan-btn {
   background: linear-gradient(45deg, #ff6600, #ffcc00);
-  font-family: "Seoge UI";
+  font-family: "Arial";
   color: rgb(32, 31, 31);
   font-weight: 700;
   border: none;
@@ -267,7 +301,7 @@ box-icon {
   box-shadow: 0 5px 15px rgba(255, 165, 0, 0.75);
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -537,7 +571,9 @@ box-icon {
   gap: 20px;
 }
 
-.auth-form.active {
+.auth-form
+
+{
   display: flex;
 }
 
@@ -953,29 +989,59 @@ a:focus {
   text-decoration: underline;
 }
 
-/* Hamburger button styles */
-.hamburger {
-  display: none; /* Hidden by default, shown on small screens */
-  width: 30px;
-  height: 25px;
-  position: relative;
+/*Hamburger CSS*/
+
+.hamburger-btn {
+  display: none; /* Hidden on large screens (will be visible in mobile view) */
+  background: none;
+  border: none;
   cursor: pointer;
-  z-index: 1101; /* above navbar */
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 8px;
+  z-index: 2000;
 }
 
-.hamburger span {
-  display: block;
+/* Hamburger icon lines */
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+  width: 28px;
   height: 3px;
-  background-color: #ffb347;
+  background-color: white;
+  display: block;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
+}
+
+/* Hamburger icon lines */
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+  width: 28px;
+  height: 3px;
+  background-color: white;
+  display: block;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* Animation: Turn into X */
+.hamburger-btn.open .hamburger-icon {
+  background-color: transparent;
+}
+
+.hamburger-btn.open .hamburger-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.hamburger-btn.open .hamburger-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
 }
 
 /* Show hamburger on small screens */
 @media (max-width: 768px) {
-  .hamburger {
+  #hamburger {
     display: flex;
   }
 }
@@ -999,101 +1065,107 @@ a:focus {
     max-width: 90%;
   }
 }
-/* Style for the hamburger toggle button */
+
+/* ------------------------- */
+/* HAMBURGER BUTTON STYLES   */
+/* ------------------------- */
 .hamburger-btn {
-  display: none; /* Hidden on large screens */
+  display: none; /* Hidden on large screens (will be visible in mobile view) */
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1101;
-  border: none;
   padding: 8px;
-  transition: all 0.3s ease;
+  z-index: 2000;
+}
+
+/* Hamburger icon lines */
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+  width: 28px;
+  height: 3px;
+  background-color: white;
+  display: block;
+  border-radius: 2px;
+  transition: 0.3s ease;
 }
 
 .hamburger-icon {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: #ffb347;
   position: relative;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.hamburger-icon::before,
-.hamburger-icon::after {
-  content: "";
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: #ffb347;
-  position: absolute;
-  left: 0;
-  transition: all 0.3s ease;
-  border: none;
 }
 
 .hamburger-icon::before {
+  content: "";
+  position: absolute;
   top: -8px;
-  border: none;
 }
 
 .hamburger-icon::after {
+  content: "";
+  position: absolute;
   top: 8px;
-  border: none;
 }
 
-/* When menu is open, animate to cross (X) */
+/* Animation: Turn into X */
 .hamburger-btn.open .hamburger-icon {
   background-color: transparent;
-  border: none;
 }
+
 .hamburger-btn.open .hamburger-icon::before {
   transform: rotate(45deg);
   top: 0;
-  border: none;
 }
+
 .hamburger-btn.open .hamburger-icon::after {
   transform: rotate(-45deg);
   top: 0;
-  border: none;
 }
 
-/* Show hamburger button on small screens */
+/* ------------------------- */
+/* NAV MENU (MOBILE MODE)    */
+/* ------------------------- */
+#nav-menu {
+  display: none;                /* hidden by default */
+  position: absolute;
+  top: 70px;                    /* below navbar */
+  left: 0;
+  width: 100%;
+  background: #111;
+  padding: 1rem 0;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  z-index: 1500;
+}
+
+/* Show when active */
+#nav-menu.active {
+  display: flex;
+}
+
+/* Nav item styling (optional) */
+#nav-menu li a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+
+
+/* ------------------------- */
+/* RESPONSIVE (SHOW BUTTON)  */
+/* ------------------------- */
 @media (max-width: 768px) {
   .hamburger-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    border: none;
+    display: block;
   }
 
-  /* Hide nav menu initially, show when active */
-  #nav-menu {
+  /* Hide desktop nav in mobile */
+  .navbar .nav-item {
     display: none;
-    position: absolute;
-    right: 20px;
-    top: 70px; /* below navbar */
-    background: #222;
-    flex-direction: column;
-    width: 200px;
-    padding: 10px 0;
-    border-radius: 8px;
-    z-index: 1100;
-  }
-  #nav-menu.show {
-    display: flex;
   }
 }
 
-@media (max-width: 768px) {
-  #but {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-  }
-}
 
 /* Optional: on very small screens, make it smaller */
 @media (max-width: 480px) {
@@ -1102,4 +1174,9 @@ a:focus {
     font-size: 0.8rem;
     gap: 6px;
   }
+}
+
+#pay-now-btn
+{
+  font-family:'Trebuchet MS';
 }

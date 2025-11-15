@@ -55,3 +55,33 @@ app.post("/verify-payment", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+
+
+const QRCode = require("qrcode");
+
+// --- Generate QR After Payment Success ---
+app.post("/generate-qr", async (req, res) => {
+  try {
+    const { userId, sessionId } = req.body;
+
+    // Data to embed in QR
+    const qrData = JSON.stringify({
+      userId,
+      sessionId,
+      timestamp: Date.now(),
+    });
+
+    // Generate QR (Base64)
+    const qrImage = await QRCode.toDataURL(qrData);
+
+    res.json({
+      status: "success",
+      qrImage: qrImage, // This is a base64 PNG string
+    });
+
+  } catch (error) {
+    console.error("QR generation error:", error);
+    res.status(500).json({ status: "failure" });
+  }
+});
+

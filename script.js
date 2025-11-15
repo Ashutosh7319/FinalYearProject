@@ -1,4 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const hamburgerBtn = document.querySelector(".hamburger-btn");
+  const navMenu = document.querySelector("#nav-menu");
+
+  if (!hamburgerBtn || !navMenu) {
+    console.error("Hamburger button or nav menu not found.");
+    return;
+  }
+
+  hamburgerBtn.addEventListener("click", () => {
+    const expanded = hamburgerBtn.getAttribute("aria-expanded") === "true";
+
+    // Toggle aria state
+    hamburgerBtn.setAttribute("aria-expanded", !expanded);
+
+    // Toggle menu visibility
+    navMenu.classList.toggle("active");
+
+    // Toggle hamburger animation
+    hamburgerBtn.classList.toggle("open");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   // --- QR Code scanning logic ---
   const scanBtn = document.getElementById("scan-btn");
   const qrReader = document.getElementById("qr-reader");
@@ -49,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Pricing Calculator logic ---
   const hoursInput = document.getElementById("hours");
   const totalCostSpan = document.getElementById("total-cost");
-  const COST_PER_HOUR = 2000;
-  const DEPOSIT = 6000;
+  const COST_PER_HOUR = 20;
+  const DEPOSIT = 60;
 
   hoursInput.addEventListener("input", () => {
     const hours = parseInt(hoursInput.value) || 1;
@@ -104,3 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+const qrResponse = await fetch("https://finalyearproject-52g2.onrender.com/generate-qr", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    userId: "12345",
+    sessionId: order_id,
+  }),
+});
+
+const data = await qrResponse.json();
+document.getElementById("qr-image").src = data.qrImage;
