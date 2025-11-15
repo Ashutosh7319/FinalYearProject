@@ -3,6 +3,9 @@ import cors from "cors";
 
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
+const QRCode = require("qrcode");
+
+const app = express(); // MUST be first
 
 app.use(cors({
   origin: [
@@ -14,11 +17,9 @@ app.use(cors({
   allowedHeaders: "Content-Type"
 }));
 
-
-const app = express();
 app.use(express.json());
 
-// Use environment variables for keys (recommended for Render)
+// Razorpay Keys
 const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "rzp_test_RGbTLZ2nqVrbMS";
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "J5WcxqXJM7Z7WIKG4vk73NWo";
 
@@ -31,11 +32,13 @@ const razorpay = new Razorpay({
 app.post("/create-order", async (req, res) => {
   try {
     const { amount } = req.body;
+
     const order = await razorpay.orders.create({
-      amount: amount * 100, // convert to paise
+      amount: amount * 100,
       currency: "INR",
       receipt: "receipt_" + Date.now(),
     });
+
     res.json(order);
   } catch (err) {
     console.error("Error creating order:", err);
@@ -64,30 +67,18 @@ app.post("/verify-payment", (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
-
-
-const QRCode = require("qrcode");
-
-// --- Generate QR After Payment Success ---
+// --- Generate QR ---
 app.post("/generate-qr", async (req, res) => {
   try {
     const { userId, sessionId } = req.body;
 
-    // Data to embed in QR
-    const qrData = JSON.stringify({
-      userId,
-      sessionId,
-      timestamp: Date.now(),
-    });
+    const qrData = JSON.stringify({ userId, sessionId, timestamp: Date.now() });
 
-    // Generate QR (Base64)
     const qrImage = await QRCode.toDataURL(qrData);
 
     res.json({
       status: "success",
-      qrImage: qrImage, // This is a base64 PNG string
+      qrImage
     });
 
   } catch (error) {
@@ -96,3 +87,5 @@ app.post("/generate-qr", async (req, res) => {
   }
 });
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
