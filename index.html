@@ -190,7 +190,10 @@
       <h2>Payment Successful</h2>
       <p>Your unlock QR is ready. Scan it near the robot docking station.</p>
 
-      <img id="qr-image" alt="QR Code" style="width: 250px" />
+      <div id="qr-container" style="display: none; text-align: center">
+        <h3>Your Unlock QR</h3>
+        <img id="qr-image" style="width: 250px" />
+      </div>
     </div>
 
     <section class="download-section">
@@ -233,6 +236,6 @@
       type="text/javascript"
     ></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

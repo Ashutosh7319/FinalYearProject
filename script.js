@@ -77,46 +77,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
   hoursInput.addEventListener("input", () => {
     const hours = parseInt(hoursInput.value) || 1;
-    totalCostSpan.textContent = (hours * COST_PER_HOUR) + DEPOSIT;
+    totalCostSpan.textContent = hours * COST_PER_HOUR + DEPOSIT;
   });
-
+  
   document.getElementById("pay-now-btn").addEventListener("click", async () => {
     const amount = parseInt(totalCostSpan.textContent); // dynamic amount
 
     try {
-      // 1️⃣ Request order from Render backend
-      const response = await fetch("https://finalyearproject-52g2.onrender.com/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount })
-      });
+      // 1️⃣ Create order from your Render backend
+      const response = await fetch(
+        "https://finalyearproject-52g2.onrender.com/create-order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount }),
+        }
+      );
 
       const order = await response.json();
 
       // 2️⃣ Open Razorpay Checkout
       const options = {
-        key: "rzp_test_RGbTLZ2nqVrbMS", // Your Test Key ID
+        key: "rzp_test_RGbTLZ2nqVrbMS",
         amount: order.amount,
         currency: order.currency,
         order_id: order.id,
         name: "QRGate Robot Rental",
         description: "Hourly Subscription Payment",
+
         handler: async function (paymentResult) {
-          // 3️⃣ Verify payment with Render backend
-          const verifyRes = await fetch("https://finalyearproject-52g2.onrender.com/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(paymentResult)
-          });
+          // 3️⃣ Verify payment on backend
+          const verifyRes = await fetch(
+            "https://finalyearproject-52g2.onrender.com/verify-payment",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(paymentResult),
+            }
+          );
 
           const result = await verifyRes.json();
+
           if (result.status === "success") {
             alert("✅ Payment Successful!");
+
+            // ⭐ 4️⃣ Generate QR Code automatically
+            const qrRes = await fetch(
+              "https://finalyearproject-52g2.onrender.com/generate-qr",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  userId: "USER_12345", // Replace with real user logic later
+                  sessionId: order.id, // Use Razorpay order ID as session/trip ID
+                }),
+              }
+            );
+
+            const qrData = await qrRes.json();
+
+            // Display QR in <img id="qr-image">
+            document.getElementById("qr-image").src = qrData.qrImage;
+
+            // Optionally show QR container (if hidden)
+            document.getElementById("qr-container").style.display = "block";
           } else {
             alert("❌ Payment Failed. Try Again.");
           }
         },
-        theme: { color: "#F37254" }
+
+        theme: { color: "#F37254" },
       };
 
       const rzp = new Razorpay(options);
@@ -128,17 +158,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.getElementById("payment-success").style.display = "block";
-document.getElementById("qr-image").src = data.qrImage;
-
-const qrResponse = await fetch("https://finalyearproject-52g2.onrender.com/generate-qr", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    userId: "12345",
-    sessionId: order_id,
-  }),
-});
-
-const data = await qrResponse.json();
-document.getElementById("qr-image").src = data.qrImage;
