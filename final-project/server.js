@@ -66,28 +66,25 @@ app.post("/verify-payment", (req, res) => {
   }
 });
 
-try {
-  const qrRes = await fetch("https://finalyearproject-52g2.onrender.com/generate-qr", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      userId: "USER_12345",
-      sessionId: order.id
-    }),
-  });
+app.post("/generate-qr", async (req, res) => {
+  try {
+    const { userId, sessionId } = req.body;
+    console.log("Generate QR request:", req.body);
 
-  const qrData = await qrRes.json();
-  console.log("QR Response:", qrData);
+    if (!userId || !sessionId) {
+      return res.status(400).json({ status: "failure", message: "Missing userId or sessionId" });
+    }
 
-  if (qrData.status === "success") {
-    document.getElementById("qr-image").src = qrData.qrImage;
-    document.getElementById("qr-container").style.display = "block";
-  } else {
-    console.error("QR generation failed on backend");
+    const qrData = JSON.stringify({ userId, sessionId, timestamp: Date.now() });
+    const qrImage = await QRCode.toDataURL(qrData);
+
+    res.json({ status: "success", qrImage });
+  } catch (err) {
+    console.error("QR generation error:", err);
+    res.status(500).json({ status: "failure", message: err.message });
   }
-} catch (err) {
-  console.error("QR fetch error:", err);
-}
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));

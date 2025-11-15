@@ -86,8 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
           const result = await verifyRes.json();
 
           if (result.status === "success") {
-            //alert("✅ UPI Payment Successful!");
-            localStorage.setItem("orderId", order.id);
+            // Save order/session ID to localStorage
+            localStorage.setItem("sessionId", order.id);
+            localStorage.setItem("userId", "USER_12345"); // replace with real user info
+
+            // Redirect to QR page
             window.location.href = "qr.html";
             // 4️⃣ Generate QR
             const qrRes = await fetch(
@@ -105,13 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const qrData = await qrRes.json();
 
             if (qrData.status === "success" && qrData.qrImage) {
-            // Show QR image
-            const qrImg = document.getElementById("qr-image");
-            qrImg.src = qrData.qrImage;
-            document.getElementById("qr-container").style.display = "block";
-          } else {
-            alert("❌ QR generation failed!");
-          }
+              // Show QR image
+              const qrImg = document.getElementById("qr-image");
+              qrImg.src = qrData.qrImage;
+              document.getElementById("qr-container").style.display = "block";
+            } else {
+              alert("❌ QR generation failed!");
+            }
           }
         },
 
