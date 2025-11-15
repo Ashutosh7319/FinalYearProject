@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hours = parseInt(hoursInput.value) || 1;
     totalCostSpan.textContent = hours * COST_PER_HOUR + DEPOSIT;
   });
-  
+
   document.getElementById("pay-now-btn").addEventListener("click", async () => {
     const amount = parseInt(totalCostSpan.textContent); // dynamic amount
 
@@ -104,6 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
         order_id: order.id,
         name: "QRGate Robot Rental",
         description: "Hourly Subscription Payment",
+        prefill: {
+          name: "Test User",
+          email: "test@example.com",
+          contact: "9999999999",
+        },
 
         handler: async function (paymentResult) {
           // 3️⃣ Verify payment on backend
@@ -157,4 +162,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
