@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hours = parseInt(hoursInput.value) || 1;
     totalCostSpan.textContent = hours * COST_PER_HOUR + DEPOSIT;
   });
-
+  
   document.getElementById("pay-now-btn").addEventListener("click", async () => {
     const amount = parseInt(totalCostSpan.textContent); // dynamic amount
 
