@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img id="qr-image" alt="Your QR Code" style="width: 250px" />
+    <script src="script.js"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get("sessionId");
+      const userId = params.get("userId");
+
+      if (sessionId && userId) {
+        fetch("https://finalyearproject-52g2.onrender.com/generate-qr", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId, userId }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            document.getElementById("qr-image").src = data.qrImage;
+          })
+          .catch((err) => console.error("QR generation error:", err));
+      }
+    </script>
+  </body>
+</html>

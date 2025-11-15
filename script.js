@@ -86,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const result = await verifyRes.json();
 
           if (result.status === "success") {
-            alert("✅ UPI Payment Successful!");
+            //alert("✅ UPI Payment Successful!");
+            window.location.href = `qr.html?sessionId=${order.id}&userId=USER_12345`;
 
             // 4️⃣ Generate QR
             const qrRes = await fetch(
@@ -103,14 +104,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const qrData = await qrRes.json();
 
-            document.getElementById("qr-image").src = qrData.qrImage;
+            if (qrData.status === "success" && qrData.qrImage) {
+            // Show QR image
+            const qrImg = document.getElementById("qr-image");
+            qrImg.src = qrData.qrImage;
             document.getElementById("qr-container").style.display = "block";
           } else {
-            alert("❌ Payment Verification Failed.");
+            alert("❌ QR generation failed!");
+          }
           }
         },
 
-        theme: { color: "#3399cc" },
+        theme: { color: "#464e52ff" },
       };
 
       const rzp = new Razorpay(options);
