@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  // --- Pricing Calculator logic ---
   const hoursInput = document.getElementById("hours");
   const totalCostSpan = document.getElementById("total-cost");
   const COST_PER_HOUR = 20;
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const amount = parseInt(totalCostSpan.textContent);
 
     try {
-      // Create order
+      // 1️⃣ Create order
       const response = await fetch(
         "https://finalyearproject-52g2.onrender.com/create-order",
         {
@@ -48,30 +49,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const order = await response.json();
 
-      // Razorpay options
+      // 2️⃣ Razorpay options (UPI only)
       const options = {
         key: "rzp_test_RGbTLZ2nqVrbMS",
         amount: order.amount,
         currency: order.currency,
         order_id: order.id,
+
         name: "QRGate Robot Rental",
-        description: "Hourly Subscription Payment",
+        description: "UPI Payment for Robot Subscription",
+
+        // Enable UPI only
+        method: {
+          upi: true,
+          card: false,
+          netbanking: false,
+          wallet: false,
+          emi: false,
+        },
 
         handler: async function (paymentResult) {
+          // 3️⃣ Verify payment
           const verifyRes = await fetch(
             "https://finalyearproject-52g2.onrender.com/verify-payment",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(paymentResult),
+              body: JSON.stringify({
+                order_id: paymentResult.razorpay_order_id,
+                payment_id: paymentResult.razorpay_payment_id,
+                signature: paymentResult.razorpay_signature,
+              }),
             }
           );
 
           const result = await verifyRes.json();
 
           if (result.status === "success") {
-            alert("Payment Successful!");
+            alert("✅ UPI Payment Successful!");
 
+            // 4️⃣ Generate QR
             const qrRes = await fetch(
               "https://finalyearproject-52g2.onrender.com/generate-qr",
               {
@@ -89,19 +106,18 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("qr-image").src = qrData.qrImage;
             document.getElementById("qr-container").style.display = "block";
           } else {
-            alert("Payment Failed.");
+            alert("❌ Payment Verification Failed.");
           }
         },
 
-        theme: { color: "#F37254" },
+        theme: { color: "#3399cc" },
       };
 
       const rzp = new Razorpay(options);
       rzp.open();
     } catch (err) {
       console.error("Payment error:", err);
-      alert("Something went wrong.");
+      alert("❌ Something went wrong while processing payment.");
     }
   });
 });
-

@@ -66,25 +66,28 @@ app.post("/verify-payment", (req, res) => {
   }
 });
 
-// --- Generate QR after successful payment ---
-app.post("/generate-qr", async (req, res) => {
-  try {
-    const { userId, sessionId } = req.body;
+try {
+  const qrRes = await fetch("https://finalyearproject-52g2.onrender.com/generate-qr", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userId: "USER_12345",
+      sessionId: order.id
+    }),
+  });
 
-    const qrData = JSON.stringify({
-      userId,
-      sessionId,
-      timestamp: Date.now(),
-    });
+  const qrData = await qrRes.json();
+  console.log("QR Response:", qrData);
 
-    const qrImage = await QRCode.toDataURL(qrData);
-
-    res.json({ status: "success", qrImage });
-  } catch (err) {
-    console.error("QR error:", err);
-    res.status(500).json({ status: "failure" });
+  if (qrData.status === "success") {
+    document.getElementById("qr-image").src = qrData.qrImage;
+    document.getElementById("qr-container").style.display = "block";
+  } else {
+    console.error("QR generation failed on backend");
   }
-});
+} catch (err) {
+  console.error("QR fetch error:", err);
+}
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
