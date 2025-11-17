@@ -200,8 +200,14 @@ document.getElementById("signout-btn")?.addEventListener("click", () => {
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("userId");
   localStorage.removeItem("sessionId");
+  sessionStorage.clear();
 
   alert("Signed Out Successfully!");
   window.location.reload();
 });
 
+window.addEventListener("pageshow", function (e) {
+  if (e.persisted) {
+    window.location.reload();
+  }
+});
