@@ -9,10 +9,9 @@ document.getElementById("login-btn").addEventListener("click", () => {
 
   // Save login state
   localStorage.setItem("isLoggedIn", "true");
-  localStorage.setItem("userId", email);  // save as logged-in user ID
+  localStorage.setItem("userId", email);
 
   alert("Sign-in Successful!");
 
-  // Redirect to home page
-  window.location.href = "index.html";
+  window.location.href = "index.html"; 
 });

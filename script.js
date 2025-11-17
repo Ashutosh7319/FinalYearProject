@@ -184,9 +184,24 @@ document.getElementById("signin").addEventListener("click", () => {
 
 window.addEventListener("load", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const signinBtn = document.getElementById("signin-btn");
+  const signoutBtn = document.getElementById("signout-btn");
 
   if (isLoggedIn === "true") {
-    const btn = document.getElementById("signin");
-    if (btn) btn.style.display = "none";
+    if (signinBtn) signinBtn.style.display = "none";
+    if (signoutBtn) signoutBtn.style.display = "inline-block";
+  } else {
+    if (signinBtn) signinBtn.style.display = "inline-block";
+    if (signoutBtn) signoutBtn.style.display = "none";
   }
 });
+
+document.getElementById("signout-btn")?.addEventListener("click", () => {
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("sessionId");
+
+  alert("Signed Out Successfully!");
+  window.location.reload();
+});
+
