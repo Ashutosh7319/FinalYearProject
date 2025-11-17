@@ -1119,6 +1119,38 @@ a:focus {
   top: 0;
 }
 
+
+
+/* nav menu for desktop */
+/* Desktop Navigation */
+.nav-item1 {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-items1 a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+/* Hover effect */
+.nav-items1 a:hover {
+  color: #ff7f50;      /* coral accent */
+  transform: translateY(-2px);
+}
+
+/* Desktop breakpoint */
+@media screen and (max-width: 1000px) {
+  .nav-item1 {
+    display: none;     /* hide on mobile */
+  }
+}
+
 /* ------------------------- */
 /* NAV MENU (MOBILE MODE)    */
 /* ------------------------- */
@@ -1198,3 +1230,4 @@ a:focus {
   background: #e67600;
   transform: translateY(-2px);
 }
+
