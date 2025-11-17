@@ -1231,7 +1231,7 @@ a:focus {
   transform: translateY(-2px);
 }
 
-.signout-btn {
+#signout-btn {
   background-color: #ff4d4d;
   color: white;
   border: none;
@@ -1243,7 +1243,7 @@ a:focus {
   transition: 0.25s ease-in-out;
 }
 
-.signout-btn:hover {
+#signout-btn:hover {
   background-color: #e60000;
   transform: scale(1.05);
 }
