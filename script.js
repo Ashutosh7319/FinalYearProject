@@ -186,7 +186,7 @@ window.addEventListener("load", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   if (isLoggedIn === "true") {
-    const btn = document.getElementById("signin-btn");
+    const btn = document.getElementById("signin");
     if (btn) btn.style.display = "none";
   }
 });
