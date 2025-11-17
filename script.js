@@ -34,6 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("pay-now-btn").addEventListener("click", async () => {
+    // 🔒 1) Block payment if user not signed in
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const userId = localStorage.getItem("userId");
+
+    if (!isLoggedIn || !userId) {
+      alert("Please sign in before making a payment.");
+      return;
+    }
     const amount = parseInt(totalCostSpan.textContent);
 
     try {
@@ -170,6 +178,6 @@ document.getElementById("but").addEventListener("click", async () => {
   deferredPrompt = null;
 });
 
-document.getElementById("signin-btn").addEventListener("click", () => {
+document.getElementById("signin").addEventListener("click", () => {
   window.location.href = "signin.html";
 });

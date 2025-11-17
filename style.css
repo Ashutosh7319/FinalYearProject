@@ -1179,7 +1179,7 @@ a:focus {
   font-family:'Trebuchet MS';
 }
 
-.signin-btn {
+#signin {
   background: #ff8800;
   color: white;
   display: flex;
@@ -1194,7 +1194,7 @@ a:focus {
   transition: 0.3s ease;
 }
 
-.signin-btn:hover {
+#signin:hover {
   background: #e67600;
   transform: translateY(-2px);
 }
