@@ -181,3 +181,12 @@ document.getElementById("but").addEventListener("click", async () => {
 document.getElementById("signin").addEventListener("click", () => {
   window.location.href = "signin.html";
 });
+
+window.addEventListener("load", () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (isLoggedIn === "true") {
+    const btn = document.getElementById("signin-btn");
+    if (btn) btn.style.display = "none";
+  }
+});

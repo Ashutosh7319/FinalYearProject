@@ -7,9 +7,12 @@ document.getElementById("login-btn").addEventListener("click", () => {
     return;
   }
 
-  // Save login state in localStorage
-  localStorage.setItem("loggedInUser", email);
+  // Save login state
+  localStorage.setItem("isLoggedIn", "true");
+  localStorage.setItem("userId", email);  // save as logged-in user ID
 
   alert("Sign-in Successful!");
-  window.location.href = "index.html";  // redirect back to main page
+
+  // Redirect to home page
+  window.location.href = "index.html";
 });
