@@ -184,7 +184,7 @@ document.getElementById("signin").addEventListener("click", () => {
 
 window.addEventListener("load", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const signinBtn = document.getElementById("signin-btn");
+  const signinBtn = document.getElementById("signin");
   const signoutBtn = document.getElementById("signout-btn");
 
   if (isLoggedIn === "true") {
