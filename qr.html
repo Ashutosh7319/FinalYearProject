@@ -3,72 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <title>Your QR Code</title>
- <style>
+
+  <style>
+    :root {
+      --main-color: rgb(0, 217, 255);
+      --text-color: #ffffff;
+      --bg-color: #0d0d0d;
+      --card-bg: #1a1a1a;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #1b1919, #201e1d);
-      color: white;
+      background: var(--bg-color);
+      color: var(--text-color);
+      padding: 20px;
     }
 
-    .qr-container {
-      background: #f6f4f4;
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    .qr-box {
+      background: var(--card-bg);
+      padding: 35px;
+      width: 350px;
+      border-radius: 20px;
       text-align: center;
-      max-width: 400px;
-      width: 90%;
+      box-shadow: 0 0 25px rgba(0, 208, 255, 0.25);
+      transition: 0.3s ease-in-out;
+    }
+
+    .qr-box:hover {
+      box-shadow: 0 0 35px rgba(0, 255, 166, 0.45);
+      transform: scale(1.02);
     }
 
     h1 {
-      font-size: 1.8rem;
-      color: #faf9f9;
-      margin-bottom: 20px;
+      font-size: 2rem;
+      color: var(--main-color);
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     p {
-      color: #d3ff7c;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      color: #dcdcdc;
     }
 
     #qr-image {
-      width: 250px;
-      height: 250px;
+      width: 230px;
+      height: 230px;
+      border-radius: 12px;
+      background: #262626;
+      padding: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 221, 0.4);
       margin-bottom: 20px;
     }
 
-    .btn-download {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #ff7f50;
-      color: #fff;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.3s ease;
+    #qr-error {
+      color: #ff4d4d;
+      margin-top: 10px;
+      font-size: 0.9rem;
     }
 
-    .btn-download:hover {
-      background-color: #ff6333;
+    .download-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: var(--main-color);
+      color: black;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: 0.3s ease-in-out;
+      font-size: 1rem;
+      box-shadow: 0 0 20px rgba(255, 165, 0, 0.4);
+    }
+
+    .download-btn:hover {
+      transform: scale(1.05);
+      background: #42ffe0;
+      box-shadow:
+        0 0 25px rgba(255, 165, 0, 0.6),
+        0 0 45px rgba(255, 165, 0, 0.4);
     }
   </style>
 </head>
+
 <body>
-  <h1>Your QR Code</h1>
-  <p>Show this QR to unlock the robot</p>
-  <img id="qr-image" alt="QR Code" />
-  <p id="qr-error" style="color:red;"></p>
+
+  <div class="qr-box">
+    <h1>Your QR Code</h1>
+    <p>Show this QR to unlock the robot</p>
+
+    <img id="qr-image" alt="QR Code">
+
+    <p id="qr-error"></p>
+
+    <a href="#" id="download-link" class="download-btn" style="display:block;">
+      Download QR
+    </a>
+  </div>
 
   <script src="qr-script.js"></script>
 </body>

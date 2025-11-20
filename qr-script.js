@@ -31,3 +31,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("QR fetch error:", err);
   }
 });
+
+document.getElementById("download-link").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const qrImg = document.getElementById("qr-image");
+
+    // If QR is not loaded
+    if (!qrImg || !qrImg.src || qrImg.src.trim() === "") {
+        alert("QR Code not loaded yet!");
+        return;
+    }
+
+    // Create a hidden anchor for downloading
+    const a = document.createElement("a");
+    a.href = qrImg.src;          // The QR image source
+    a.download = "robot-qr.png"; // File name for download
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+});

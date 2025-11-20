@@ -5,52 +5,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QRGate - A gateway to your Robot</title>
-  <!-- Boxicons CSS -->
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" href="logo1.png">
+  <link rel="icon" type="image/png" href="logo.png">
   <meta name="theme-color" content="#ff7f50">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
-  <nav class="navbar">
-    <div class="logo">
-      <img src="logo1.png" alt="The Ultron Logo" class="logo-img" />
-      <span>The Ultron</span>
-    </div>
+  <header class="header">
 
+    <a href="#sec-1" class="logo">
+      <img src="/logo.png" alt="" class="logo-img">
+      The<span>&nbsp;Ultron </span></a>
+    <i class="bx bx-menu" id="menu-icon"></i>
 
-    <ul class="nav-item1" id="nav-menu1">
-      <li class="nav-items"><a href="#sec-1">Home</a></li>
-      <li class="nav-items"><a href="#sec-2">How it works</a></li>
-      <li class="nav-items"><a href="#sec-3">Pricing</a></li>
-    </ul>
-
-
-    <ul class="nav-item" id="nav-menu">
-      <li class="nav-items"><a href="#sec-1">Home</a></li>
-      <li class="nav-items"><a href="#sec-2">How it works</a></li>
-      <li class="nav-items"><a href="#sec-3">Pricing</a></li>
-    </ul>
-
-    <a href="#sec-4" id="but" class="btn">
-      Download App
-      <box-icon name="download" color="white" size="sm"></box-icon>
-    </a>
-
-    <!-- Fixed Hamburger Button -->
-    <button class="hamburger-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-      <span class="hamburger-icon"></span>
-    </button>
-  </nav>
+    <nav class="navbar">
+      <a href="#sec-1">Home</a>
+      <a href="#services">Working</a>
+      <a href="#sec-3">Pricing</a>
+      <div class="btn-group">
+        <a href="signin.html" class="btn" id="sin">Sign In</a>
+        <a href="#sec-4" id="but" class="btn">Download App </a>
+      </div>
+    </nav>
+  </header>
 
   <div class="chatbot-link" onclick="openChatbotPopup()">
-    <box-icon name="chat" color="white"></box-icon>
-    <span>Chat With Us</span>
+    <box-icon name="chat" color="black"></box-icon>
   </div>
 
   <!-- Hero Section -->
@@ -62,49 +52,52 @@
       <div class="hero-text">
         <h1>Explore Smart. Tour Safer with Our Robot Guide.</h1>
         <p>Say goodbye to scams. Rent a robot tour guide with just a scan.</p>
-        <button id="signin" class="signin-btn">
-          <box-icon name="log-in" color="white" size="sm"></box-icon>
-          <span>Sign In</span>
-        </button>
+        <a href="signin.html" class="signin-btn" id="signin">Sign In</a>
         <button id="signout-btn" style="display:none;" class="btn">
           Sign Out
         </button>
-
-
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section class="how-it-works" id="sec-2">
-    <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step">
-        <box-icon name="mobile-alt" type="solid" color="orange" size="lg"></box-icon>
-        <h3>Download & Register</h3>
-        <p>
-          Get started by downloading the app and completing a quick
-          registration with your safety deposit.
-        </p>
+  <section class="services" id="services">
+    <h2 class="heading">How it Works?</h2>
+    <div class="services-container">
+
+      <div class="service-box">
+        <div class="service-info">
+          <i class="bx bx-mobile"></i>
+          <h4>Download & Register</h4>
+          <p>
+            Get started by downloading the app and completing a quick registration with your safety deposit.
+          </p>
+        </div>
       </div>
-      <div class="step">
-        <box-icon name="time-five" type="solid" color="orange" size="lg"></box-icon>
-        <h3>Choose Your Hourly Plan</h3>
-        <p>
-          Rent the robot for a fixed hourly rate. For example, ₹200 per hour.
-          Choose how long you need it.
-        </p>
+
+      <div class="service-box">
+        <div class="service-info">
+          <i class="bx bx-time-five"></i>
+          <h4>Choose Your Hourly Plan</h4>
+          <p>
+            Rent the robot for a fixed hourly rate for example, &#8377;200/hour. Choose how long you need it.
+          </p>
+        </div>
       </div>
-      <div class="step">
-        <box-icon name="shield-alt-2" type="solid" color="orange" size="lg"></box-icon>
-        <h3>Return on Time</h3>
-        <p>
-          A safety deposit (₹600 or more) is collected. If returned on time,
-          it’s refunded. Late? ₹200/hour penalty applies.
-        </p>
+
+      <div class="service-box">
+        <div class="service-info">
+          <i class="bx bxs-shield-alt-2"></i>
+          <h4>Return On Time</h4>
+          <p>
+            A safety deposit (&#8377;600) is collected. If returned on time, it is refunded. If Late? &#8377;200/hour
+            penalty applies.
+          </p>
+        </div>
       </div>
+
     </div>
   </section>
+
 
   <!-- Pricing Calculator Section -->
   <section class="pricing-calculator" id="sec-3">
@@ -114,7 +107,7 @@
       <input type="number" id="hours" min="1" max="24" value="1" />
       <p>Cost per hour: ₹20</p>
       <p>Safety deposit: ₹60 (refundable)</p>
-      <p>Total Cost: ₹<span id="total-cost">80</span></p>
+      <p id="total">Total Cost: ₹<span id="total-cost">80</span></p>
       <button id="pay-now-btn">Pay Now</button>
     </div>
   </section>
@@ -176,7 +169,7 @@
       <nav class="footer-nav">
         <a href="#how-it-works">How It Works</a>
         <a href="#download-section">Download</a>
-        <a href="#contact">Contact</a>
+        <a href="signin.html">Sign In</a>
         <a href="#privacy-policy">Privacy Policy</a>
       </nav>
     </div>
@@ -186,10 +179,9 @@
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script type="module" src="script.js?v=3.1"></script>
-
-
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
 
 </body>
-</html>
 
+</html>

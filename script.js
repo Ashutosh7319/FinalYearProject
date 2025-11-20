@@ -1,25 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const hamburgerBtn = document.querySelector(".hamburger-btn");
-  const navMenu = document.querySelector("#nav-menu");
+const menuIcon = document.querySelector("#menu-icon");
+const navbar = document.querySelector('.navbar');
 
-  if (!hamburgerBtn || !navMenu) {
-    console.error("Hamburger button or nav menu not found.");
-    return;
-  }
+menuIcon.onclick = () =>
+{
+    menuIcon.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
+}
 
-  hamburgerBtn.addEventListener("click", () => {
-    const expanded = hamburgerBtn.getAttribute("aria-expanded") === "true";
-
-    // Toggle aria state
-    hamburgerBtn.setAttribute("aria-expanded", !expanded);
-
-    // Toggle menu visibility
-    navMenu.classList.toggle("active");
-
-    // Toggle hamburger animation
-    hamburgerBtn.classList.toggle("open");
-  });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- Pricing Calculator logic ---
@@ -178,20 +165,20 @@ document.getElementById("but").addEventListener("click", async () => {
   deferredPrompt = null;
 });
 
-document.getElementById("signin").addEventListener("click", () => {
-  window.location.href = "signin.html";
-});
 
 window.addEventListener("load", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
   const signinBtn = document.getElementById("signin");
   const signoutBtn = document.getElementById("signout-btn");
+  const onemore = document.getElementById("sin");
 
   if (isLoggedIn === "true") {
     if (signinBtn) signinBtn.style.display = "none";
-    if (signoutBtn) signoutBtn.style.display = "inline-block";
+    if (signinBtn) onemore.style.display = "none";
+    if (signoutBtn) signoutBtn.style.display = "inline-block" ;
   } else {
     if (signinBtn) signinBtn.style.display = "inline-block";
+    if (signinBtn) more.style.display = "inline-block";
     if (signoutBtn) signoutBtn.style.display = "none";
   }
 });
