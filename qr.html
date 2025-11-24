@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Your QR Code</title>
@@ -93,6 +94,17 @@
         0 0 25px rgba(255, 165, 0, 0.6),
         0 0 45px rgba(255, 165, 0, 0.4);
     }
+
+    #qr-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Horizontally center */
+      justify-content: center;
+      /* Vertically center if container is tall */
+      width: 100%;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -102,7 +114,10 @@
     <h1>Your QR Code</h1>
     <p>Show this QR to unlock the robot</p>
 
-    <img id="qr-image" alt="QR Code">
+    <div id="qr-container">
+      <img id="qr-image" alt="QR Code">
+    </div>
+
 
     <p id="qr-error"></p>
 
@@ -113,4 +128,5 @@
 
   <script src="qr-script.js"></script>
 </body>
+
 </html>
