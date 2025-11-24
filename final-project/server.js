@@ -68,22 +68,27 @@ app.post("/verify-payment", (req, res) => {
 
 app.post("/generate-qr", async (req, res) => {
   try {
-    const { userId, sessionId } = req.body;
+    const { userId, sessionId, url } = req.body;
     console.log("Generate QR request:", req.body);
 
-    if (!userId || !sessionId) {
-      return res.status(400).json({ status: "failure", message: "Missing userId or sessionId" });
+    if (!url) {
+      return res.status(400).json({
+        status: "failure",
+        message: "Missing URL for QR code"
+      });
     }
 
-    const qrData = JSON.stringify({ userId, sessionId, timestamp: Date.now() });
-    const qrImage = await QRCode.toDataURL(qrData);
+    // 🔥 QR WILL CONTAIN ONLY THE URL
+    const qrImage = await QRCode.toDataURL(url);
 
     res.json({ status: "success", qrImage });
+
   } catch (err) {
     console.error("QR generation error:", err);
     res.status(500).json({ status: "failure", message: err.message });
   }
 });
+
 
 
 const PORT = process.env.PORT || 3000;
