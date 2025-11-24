@@ -13,5 +13,5 @@ document.getElementById("login-btn").addEventListener("click", () => {
 
   alert("Sign-in Successful!");
 
-  window.location.href = "https://teamflex.netlify.app/"; 
+  window.location.href = "/";
 });
