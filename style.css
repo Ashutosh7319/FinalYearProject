@@ -944,6 +944,17 @@ a:focus {
   background-color: var(--bg-color);
 }
 
+#bn
+  {
+    display: none;
+  }
+
+#bn-i
+{
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+}
+
 @media(max-width:1024px) {
   #menu-icon {
     display: block;
@@ -971,5 +982,13 @@ a:focus {
 
   .navbar.active {
     display: block;
+  }
+  #bn
+  {
+    display: flex;
+  }
+  .btn-group
+  {
+    display: none;
   }
 }

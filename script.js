@@ -167,6 +167,25 @@ document.getElementById("but").addEventListener("click", async () => {
   deferredPrompt = null;
 });
 
+// Responsive download button.
+document.getElementById("bn").addEventListener("click", async () => {
+  if (!deferredPrompt) {
+    alert("App is already installed or not installable right now.");
+    return;
+  }
+
+  deferredPrompt.prompt();
+
+  const choice = await deferredPrompt.userChoice;
+
+  if (choice.outcome === "accepted") {
+    console.log("User installed the app");
+  } else {
+    console.log("User dismissed install prompt");
+  }
+
+  deferredPrompt = null;
+});
 
 window.addEventListener("load", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
