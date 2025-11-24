@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       body: JSON.stringify({
         userId,
         sessionId,
-        url: "http://192.168.4.1"
+        url: "http://192.168.4.1",
       })
     });
 
