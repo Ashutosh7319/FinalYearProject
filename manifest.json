@@ -1,6 +1,6 @@
 {
-  "name": "QRGate Robot Rental",
-  "short_name": "QRGate",
+  "name": "Ultron",
+  "short_name": "Ultron",
   "description": "Generate and scan QR codes to unlock your robot.",
   "start_url": "/index.html",
   "display": "standalone",
