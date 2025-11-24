@@ -101,7 +101,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/*", (req, res, next) => {
+app.use("/api", (req, res, next) => {
   res.setHeader("Cache-Control", "no-store");
   next();
 });
