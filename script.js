@@ -96,6 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({
                   userId: "USER_12345",
                   sessionId: order.id,
+                  url: "http://192.168.4.1",
+
                 }),
               }
             );
