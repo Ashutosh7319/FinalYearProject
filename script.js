@@ -221,3 +221,16 @@ window.addEventListener("pageshow", function (e) {
     window.location.reload();
   }
 });
+
+document.getElementById("pay-now-btn").addEventListener("click", () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const userId = localStorage.getItem("userId");
+
+  if (!isLoggedIn || !userId) {
+    alert("Please sign in before making a payment.");
+    return;
+  }
+
+  // redirect immediately
+  window.location.href = "qr.html";
+});
