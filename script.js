@@ -117,11 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const rzp = new Razorpay(options);
       rzp.open();
-
-      // Redirect to QR page no matter what happens
-      setTimeout(() => {
-        window.location.href = "qr.html";
-      }, 2000);
     } catch (err) {
       console.error("Payment error:", err);
       alert("❌ Something went wrong while processing payment.");
