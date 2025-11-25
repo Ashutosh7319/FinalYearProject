@@ -29,9 +29,9 @@ app.use(
 );
 
 // Razorpay keys
-const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "rzp_test_RGbTLZ2nqVrbMS";
+const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "rzp_test_RjpvwpRXszRvNZ";
 const RAZORPAY_KEY_SECRET =
-  process.env.RAZORPAY_KEY_SECRET || "J5WcxqXJM7Z7WIKG4vk73NWo";
+  process.env.RAZORPAY_KEY_SECRET || "w768Q16UwPVK05HTVPljHfdZ";
 
 const razorpay = new Razorpay({
   key_id: RAZORPAY_KEY_ID,
