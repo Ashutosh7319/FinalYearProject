@@ -136,7 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // redirect immediately
+    // Create a fake session ID (since no Razorpay)
+    const sessionId = "SESSION_" + Date.now();
+
+    localStorage.setItem("sessionId", sessionId);
+
+    // Redirect to QR page
     window.location.href = "qr.html";
   });
 });
