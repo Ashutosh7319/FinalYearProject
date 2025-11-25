@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://theutrlon.onrender.com",
+      "https://theutlron.onrender.com",
     ],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
