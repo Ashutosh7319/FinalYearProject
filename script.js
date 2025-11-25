@@ -1,12 +1,10 @@
 const menuIcon = document.querySelector("#menu-icon");
-const navbar = document.querySelector('.navbar');
+const navbar = document.querySelector(".navbar");
 
-menuIcon.onclick = () =>
-{
-    menuIcon.classList.toggle('bx-x');
-    navbar.classList.toggle('active');
-}
-
+menuIcon.onclick = () => {
+  menuIcon.classList.toggle("bx-x");
+  navbar.classList.toggle("active");
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- Pricing Calculator logic ---
@@ -97,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   userId: "USER_12345",
                   sessionId: order.id,
                   url: "http://192.168.4.1",
-
                 }),
               }
             );
@@ -120,6 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const rzp = new Razorpay(options);
       rzp.open();
+
+      // Redirect to QR page no matter what happens
+      setTimeout(() => {
+        window.location.href = "qr.html";
+      }, 2000);
     } catch (err) {
       console.error("Payment error:", err);
       alert("❌ Something went wrong while processing payment.");
@@ -196,7 +198,7 @@ window.addEventListener("load", () => {
   if (isLoggedIn === "true") {
     if (signinBtn) signinBtn.style.display = "none";
     if (signinBtn) onemore.style.display = "none";
-    if (signoutBtn) signoutBtn.style.display = "inline-block" ;
+    if (signoutBtn) signoutBtn.style.display = "inline-block";
   } else {
     if (signinBtn) signinBtn.style.display = "inline-block";
     if (signinBtn) more.style.display = "inline-block";
